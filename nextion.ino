@@ -1,6 +1,6 @@
 void NextionInit(){
   nexInit();
-  nexHwSerial.begin(9600, SERIAL_8N1, NEXTIONHWSERIAL_RX_PIN, NEXTIONHWSERIAL_TX_PIN);
+  nexHwSerial.begin(9600, SERIAL_8N1, SERIAL2_RX_PIN, SERIAL2_TX_PIN);
 }
 
 void SendCmd(String command){           // 영문용 디스플레이 send

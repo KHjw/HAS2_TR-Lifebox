@@ -23,7 +23,9 @@ void RfidInit(){
   }
 }
 
-void RfidLoop(int pn532_code){
+void RfidLoop(){
+  int pn532_code = 1;     // RFID 한개만 사용
+
   uint8_t uid[3][7] = {{0, 0, 0, 0, 0, 0, 0},
                        {0, 0, 0, 0, 0, 0, 0},
                        {0, 0, 0, 0, 0, 0, 0}}; // Buffer to store the returned UID
@@ -67,28 +69,16 @@ void CheckingPlayers(uint8_t rfidData[32]){ //어떤 카드가 들어왔는지 �
       ESP.restart();
       break;
     case 'E':
-      Language = "Eng";
-      SendCmd("page pgWait");                       //영문 대기페이지 로드
+      AllNeoColor(PURPLE);
+      sendCommand("chip.vLang.txt=\"Eng\"");          // Nextion 언어변수를 Eng로
       delay(10);
+      sendCommand("page chip");                       // 초기페이지 세팅
       Serial.println("Language set to English");
-      NeoBlink(PN532,PURPLE,2,100);                 //영문 변환 표시용
-      AllNeoColor(YELLOW);
+      delay(10);
+      ESP.restart();
       break;
     default: 
     Serial.println("Wrong TAG");
     break;
   }
-}
-
-//****************************************rfid_ptr Function****************************************
-void Quiz_Start(){
-
-}
-
-void Quiz_Solved(){
-
-}
-
-void Item_Took(){
-
 }

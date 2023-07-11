@@ -3,7 +3,42 @@
 
 #include "Library_and_pin.h"
 
+//****************************************MQTT SETUP****************************************
+HAS2_MQTT has2_mqtt;
+
 //****************************************Game SETUP****************************************
+// game_ptr
+void Game_Void();
+void Game_Manual();
+void Game_Setting();
+void Game_Ready();
+void Game_Selected();
+void Game_Login();
+void Game_Used();
+void Game_ptrPrint(String print);
+// rfid_ptr
+void Mode_Mannual();
+
+void (*game_ptr)() = Game_Manual;
+void (*rfid_ptr)() = Game_Void;
+
+String Language = "Kor";
+String game_ptr_state = "";
+bool machine_used = false;
+
+//****************************************SimpleTimer SETUP****************************************
+SimpleTimer BlinkTimer;
+
+void TimerInit();
+void BlinkTimerStart(int Neo, int NeoColor);
+void BlinkTimerFunc();
+int blinkNeo = 0;
+int blinkColor = 0;
+bool blinkOn = false;
+
+int blinkTimerId;
+
+unsigned long blinkTime = 1300;   // 1sec
 
 //****************************************Neopixel SETUP****************************************
 void NeopixelInit();
@@ -13,7 +48,7 @@ void NeoBlink(int neo_code, int color_code, int blink_num, int blink_time);
 const int NeoNum = 3;
 const int NumPixels[3] = {28,24,24};
 
-enum {TOP = 0, MID, BOT};
+enum {TOP = 0, MID, BOT, ALLNEO};
 Adafruit_NeoPixel pixels[3] = {Adafruit_NeoPixel(NumPixels[TOP], NEOPIXEL_TOP_PIN, NEO_GRB + NEO_KHZ800),
                                Adafruit_NeoPixel(NumPixels[MID], NEOPIXEL_MID_PIN, NEO_GRB + NEO_KHZ800),
                                Adafruit_NeoPixel(NumPixels[BOT], NEOPIXEL_BOT_PIN, NEO_GRB + NEO_KHZ800)};
@@ -37,12 +72,12 @@ Adafruit_PN532 nfc[1] = {Adafruit_PN532(PN532_SCK, PN532_MISO, PN532_MOSI, PN532
 
 bool rfid_init_complete[2];
 void RfidInit();
-void RfidLoop(int pn532_code);
-void RfidLoop_All();
+void RfidLoop();
 void CheckingPlayers(uint8_t rfidData[32]);
 
-void Quiz_Start();
-void Quiz_Solved();
-void Item_Took();
+//****************************************Nextion SETUP****************************************
+HardwareSerial nexHwSerial(2);
+
+void NextionInit();
 
 #endif

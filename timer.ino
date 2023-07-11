@@ -3,10 +3,12 @@ void TimerInit(){
     BlinkTimer.deleteTimer(blinkTimerId); 
 }
 
+//****************************************Blink Timer****************************************
 void BlinkTimerStart(int Neo, int NeoColor){
     blinkNeo = Neo;
     blinkColor = NeoColor;
-    blinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
+    if(Neo == ALLNEO)   blinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkAllTimerFunc);
+    else                blinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
 }
 
 void BlinkTimerFunc(){
@@ -19,11 +21,6 @@ void BlinkTimerFunc(){
         pixels[blinkNeo].lightColor(color[BLACK]);
         blinkOn = true;
     }
-}
-
-void BlinkAllTimerStart(int NeoColor){
-    blinkColor = NeoColor;
-    blinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
 }
 
 void BlinkAllTimerFunc(){
@@ -41,4 +38,3 @@ void BlinkAllTimerFunc(){
         blinkOn = true;
     }
 }
- 

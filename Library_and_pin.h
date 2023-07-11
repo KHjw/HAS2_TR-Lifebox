@@ -1,10 +1,14 @@
 #ifndef _LIBRARY_AND_PIN_
 #define _LIBRARY_AND_PIN_
 
-#include <Adafruit_NeoPixel.h>
-#include <NexHardware.h>
+#include <Arduino.h>
+
 #include <Adafruit_PN532.h>
-#include <esp_task_wdt.h>
+#include <Adafruit_NeoPixel.h>
+
+#include <Nextion.h>
+#include <HAS2_MQTT.h>
+#include <SimpleTimer.h>
 
 #define SERIAL2_RX_PIN 39
 #define SERIAL2_TX_PIN 33

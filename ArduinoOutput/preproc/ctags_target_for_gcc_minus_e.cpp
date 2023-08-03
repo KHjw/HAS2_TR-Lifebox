@@ -1,4 +1,4 @@
-# 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
+# 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
  /*
 
  *
@@ -20,8 +20,8 @@
  *
 
  */
-# 13 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
-# 14 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino" 2
+# 13 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
+# 14 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino" 2
 
 void setup() {
   Serial.begin(115200);
@@ -37,7 +37,7 @@ void loop() {
   game_ptr();
   BlinkTimer.run();
 }
-# 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
+# 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\Game.ino"
 //****************************************game_ptr Function****************************************
 void Game_Void(){ //포인터 초기세팅용 void함수
 }
@@ -81,7 +81,7 @@ void Game_Login(){
 void Game_Used(){
   Game_ptrPrint("Game_Used");
   AllNeoColor(BLUE);
-}`-
+}
 
 //****************************************rfid_ptr Function****************************************
 void Mode_Mannual(){
@@ -98,22 +98,14 @@ void Mode_Mannual(){
   }
   delay(1000);
 }
-# 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\mqtt.ino"
+# 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\mqtt.ino"
 void callback(char* topic, byte* payload, unsigned int length)
 {
-  static bool start = false;
-  if(!start){
-    start = true;
-    has2_mqtt.Publish(my_topic, "start");
-    return ;
-  }
-
   String input_data = "";
-
   for (int i = 0; i < length; i++)
     input_data += (char)payload[i];
 
-  Serial.print("Message arrived [");
+  Serial.print("Message arrived[");
   Serial.print(topic);
   Serial.print("] : ");
   Serial.println(input_data);
@@ -122,17 +114,11 @@ void callback(char* topic, byte* payload, unsigned int length)
   else if(input_data == "Manual") game_ptr = Game_Manual;
   else if(input_data == "Setting") game_ptr = Game_Setting;
   else if(input_data == "Ready") game_ptr = Game_Ready;
-  else if(input_data == "Activate") game_ptr = Game_OUTPN532_login;
   else if(input_data == "Selected") game_ptr = Game_Selected;
   else if(input_data == "Login") game_ptr = Game_Login;
   else if(input_data == "Used") game_ptr = Game_Used;
-
-  if(topic == ALL){
-  }
-  else if(topic == my_topic){
-  }
 }
-# 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\neopixel.ino"
+# 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\neopixel.ino"
 void NeopixelInit(){
   for(int i=0; i<NeoNum; i++){
     pixels[i].begin();
@@ -153,7 +139,7 @@ void NeoBlink(int neo_code, int color_code, int blink_num, int blink_time){
     delay(blink_time);
   }
 }
-# 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\nextion.ino"
+# 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\nextion.ino"
 void NextionInit(){
   nexInit();
   nexHwSerial.begin(9600, 0x800001c, 39, 33);
@@ -169,17 +155,7 @@ void SendCmd(String command){ // 영문용 디스플레이 send
   }
   sendCommand(cmd.c_str());
 }
-
-void ExpSend(){
-  SendCmd("picExp.pic=2");
-  SendCmd("pgItemOpen.vExp.val=50"); // 경험치 +50 차있는걸로 기본세팅
-}
-
-void BatteryPackSend(){
-  SendCmd("picBatteryPack.pic=5");
-  SendCmd("pgItemOpen.vBatteryPack.val=3"); // 배터리팩 3개 차있는걸로 기본세팅
-}
-# 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\rfid.ino"
+# 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\rfid.ino"
 void RfidInit(){
   RestartPn532:
   for (int i = 0; i < rfid_num; ++i)
@@ -264,7 +240,7 @@ void CheckingPlayers(uint8_t rfidData[32]){ //어떤 카드가 들어왔는지 �
     break;
   }
 }
-# 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\timer.ino"
+# 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\timer.ino"
 void TimerInit(){
     blinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
     BlinkTimer.deleteTimer(blinkTimerId);

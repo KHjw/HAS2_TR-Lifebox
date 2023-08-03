@@ -1,2 +1,2 @@
-c:\Github\HAS2_TR\HAS2_TR-Lifebox\ArduinoOutput\libraries\Adafruit_NeoPixel\kendyte_k210.c.o: \
- C:\Users\kevin\OneDrive\문서\Arduino\libraries\Adafruit_NeoPixel\kendyte_k210.c
+c:\Github\HAS2-TR\0_KHjinu\롤백코드\생장\ 롤백\HAS2_TR-Lifebox\ArduinoOutput\libraries\Adafruit_NeoPixel\kendyte_k210.c.o: \
+ C:\Users\teamh\Documents\Arduino\libraries\Adafruit_NeoPixel\kendyte_k210.c

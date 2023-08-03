@@ -41,7 +41,7 @@ void Game_Login(){
 void Game_Used(){
   Game_ptrPrint("Game_Used");
   AllNeoColor(BLUE);
-}`-
+}
 
 //****************************************rfid_ptr Function****************************************
 void Mode_Mannual(){

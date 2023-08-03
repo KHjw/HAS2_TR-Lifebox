@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
  /*
  *
  * @file TR_Lifebox.ino
@@ -14,59 +14,55 @@
 
 #include "TR_Lifebox.h"
 
-#line 15 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
+#line 15 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
 void setup();
-#line 25 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
+#line 25 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
 void loop();
-#line 2 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
+#line 2 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\Game.ino"
 void Game_Void();
-#line 5 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
+#line 5 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\Game.ino"
 void Game_ptrPrint(String print);
-#line 12 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
+#line 12 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\Game.ino"
 void Game_Manual();
-#line 18 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
+#line 18 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\Game.ino"
 void Game_Setting();
-#line 23 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
+#line 23 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\Game.ino"
 void Game_Ready();
-#line 28 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
+#line 28 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\Game.ino"
 void Game_Selected();
-#line 36 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
+#line 36 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\Game.ino"
 void Game_Login();
-#line 41 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
+#line 41 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\Game.ino"
 void Game_Used();
-#line 47 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
+#line 47 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\Game.ino"
 void Mode_Mannual();
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\mqtt.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\mqtt.ino"
 void callback(char* topic, byte* payload, unsigned int length);
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\neopixel.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\neopixel.ino"
 void NeopixelInit();
-#line 7 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\neopixel.ino"
+#line 7 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\neopixel.ino"
 void AllNeoColor(int color_code);
-#line 13 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\neopixel.ino"
+#line 13 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\neopixel.ino"
 void NeoBlink(int neo_code, int color_code, int blink_num, int blink_time);
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\nextion.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\nextion.ino"
 void NextionInit();
-#line 6 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\nextion.ino"
+#line 6 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\nextion.ino"
 void SendCmd(String command);
-#line 17 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\nextion.ino"
-void ExpSend();
-#line 22 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\nextion.ino"
-void BatteryPackSend();
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\rfid.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\rfid.ino"
 void RfidInit();
-#line 26 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\rfid.ino"
+#line 26 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\rfid.ino"
 void RfidLoop();
-#line 47 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\rfid.ino"
+#line 47 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\rfid.ino"
 void CheckingPlayers(uint8_t rfidData[32]);
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\timer.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\timer.ino"
 void TimerInit();
-#line 7 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\timer.ino"
+#line 7 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\timer.ino"
 void BlinkTimerStart(int Neo, int NeoColor);
-#line 14 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\timer.ino"
+#line 14 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\timer.ino"
 void BlinkTimerFunc();
-#line 26 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\timer.ino"
+#line 26 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\timer.ino"
 void BlinkAllTimerFunc();
-#line 15 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
+#line 15 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
 void setup() {
   Serial.begin(115200);
   has2_mqtt.Setup(callback);         // tp-link 접속; ALL, myMAC 구독
@@ -81,7 +77,7 @@ void loop() {
   game_ptr();
   BlinkTimer.run();
 }
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\Game.ino"
 //****************************************game_ptr Function****************************************
 void Game_Void(){               //포인터 초기세팅용 void함수
 }
@@ -125,7 +121,7 @@ void Game_Login(){
 void Game_Used(){
   Game_ptrPrint("Game_Used");
   AllNeoColor(BLUE);
-}`-
+}
 
 //****************************************rfid_ptr Function****************************************
 void Mode_Mannual(){
@@ -142,22 +138,14 @@ void Mode_Mannual(){
   }
   delay(1000);
 }
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\mqtt.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\mqtt.ino"
 void callback(char* topic, byte* payload, unsigned int length) 
 {
-  static bool start = false;
-  if(!start){
-    start = true;
-    has2_mqtt.Publish(my_topic, "start");
-    return ;
-  }
-  
   String input_data = "";
-
   for (int i = 0; i < length; i++)
     input_data += (char)payload[i];
 
-  Serial.print("Message arrived [");
+  Serial.print("Message arrived[");
   Serial.print(topic);
   Serial.print("] : ");
   Serial.println(input_data);
@@ -166,17 +154,11 @@ void callback(char* topic, byte* payload, unsigned int length)
   else if(input_data == "Manual")       game_ptr = Game_Manual;
   else if(input_data == "Setting")      game_ptr = Game_Setting;
   else if(input_data == "Ready")        game_ptr = Game_Ready;
-  else if(input_data == "Activate")     game_ptr = Game_OUTPN532_login;
   else if(input_data == "Selected")     game_ptr = Game_Selected;
   else if(input_data == "Login")        game_ptr = Game_Login;
   else if(input_data == "Used")         game_ptr = Game_Used;
-
-  if(topic == ALL){
-  }
-  else if(topic == my_topic){
-  }
 }
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\neopixel.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\neopixel.ino"
 void NeopixelInit(){
   for(int i=0; i<NeoNum; i++){
     pixels[i].begin();
@@ -197,7 +179,7 @@ void NeoBlink(int neo_code, int color_code, int blink_num, int blink_time){
     delay(blink_time);
   }
 }
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\nextion.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\nextion.ino"
 void NextionInit(){
   nexInit();
   nexHwSerial.begin(9600, SERIAL_8N1, SERIAL2_RX_PIN, SERIAL2_TX_PIN);
@@ -213,18 +195,7 @@ void SendCmd(String command){           // 영문용 디스플레이 send
   }
   sendCommand(cmd.c_str());
 }
-
-void ExpSend(){
-  SendCmd("picExp.pic=2");
-  SendCmd("pgItemOpen.vExp.val=50");    // 경험치 +50 차있는걸로 기본세팅
-}
-
-void BatteryPackSend(){
-  SendCmd("picBatteryPack.pic=5");
-  SendCmd("pgItemOpen.vBatteryPack.val=3");    // 배터리팩 3개 차있는걸로 기본세팅
-}
-
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\rfid.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\rfid.ino"
 void RfidInit(){
   RestartPn532:
   for (int i = 0; i < rfid_num; ++i)
@@ -309,7 +280,7 @@ void CheckingPlayers(uint8_t rfidData[32]){ //어떤 카드가 들어왔는지 �
     break;
   }
 }
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\timer.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\timer.ino"
 void TimerInit(){
     blinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
     BlinkTimer.deleteTimer(blinkTimerId); 

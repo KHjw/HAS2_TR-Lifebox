@@ -1,4 +1,4 @@
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Library_and_pin.h"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\Library_and_pin.h"
 #ifndef _LIBRARY_AND_PIN_
 #define _LIBRARY_AND_PIN_
 

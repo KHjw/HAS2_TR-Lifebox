@@ -3,42 +3,66 @@
 
 #include "Library_and_pin.h"
 
+//****************************************Device SETUP****************************************
+String Language = "Kor";
+String myDN = "";
+String device_ptr_state = "";
+String current_scenario = "";
+bool IsMachineUsed = false;
+bool IsTakingChip = false;
+
+void VoidFunc();    // 포인터 초기화용 빈 함수
+void (*device_ptr)() = VoidFunc;
+
 //****************************************MQTT SETUP****************************************
 HAS2_MQTT has2_mqtt;
+void callback(char* topic, byte* payload, unsigned int length);
+void Mqtt_myDN(String input_data);
+void Mqtt_updateDS(String myDS);
+void Mqtt_updateSCN(String mySCN);
 
-//****************************************Game SETUP****************************************
-// game_ptr
-void Game_Void();
-void Game_Manual();
-void Game_Setting();
-void Game_Ready();
-void Game_Selected();
-void Game_Login();
-void Game_Used();
-void Game_ptrPrint(String print);
+// device_ptr
+void Device_Manual();
+void Device_Setting();
+void Device_Ready();
+void Device_GhostLogin();
+void Device_PlayerLogin();
+void Device_Used();
+void Device_ptrPrint(String print);
+
+//****************************************RFID SETUP****************************************
+Adafruit_PN532 nfc(PN532_SCK, PN532_MISO, PN532_MOSI, PN532_SS);
+
+void RfidInit();
+void RfidLoop(String mode);
+
+String tagUser = "";
+
 // rfid_ptr
-void Mode_Mannual();
-
-void (*game_ptr)() = Game_Manual;
-void (*rfid_ptr)() = Game_Void;
-
-String Language = "Kor";
-String game_ptr_state = "";
-bool machine_used = false;
+void Rfid_Manual();
+void Rfid_Ghost();
+void Rfid_Player();
+void Rfid_Used();
 
 //****************************************SimpleTimer SETUP****************************************
 SimpleTimer BlinkTimer;
+SimpleTimer TakechipTimer;
+int BlinkTimerId;
+int TakechipTimerId;
 
 void TimerInit();
+
+// blink timer
+unsigned long blinkTime = 1000;   // 1sec
 void BlinkTimerStart(int Neo, int NeoColor);
 void BlinkTimerFunc();
 int blinkNeo = 0;
 int blinkColor = 0;
 bool blinkOn = false;
-
-int blinkTimerId;
-
-unsigned long blinkTime = 1300;   // 1sec
+// takechip timer
+unsigned long TakechipTime = 1000;   // 1sec
+void TakechipTimerFunc();
+int takechipCNT = 0;
 
 //****************************************Neopixel SETUP****************************************
 void NeopixelInit();
@@ -66,18 +90,10 @@ int color[11][3] = {  {20, 20, 20},   //WHITE
                       {0, 0, 60},     //ENCODERBLUE2
                       {0, 0, 80}};    //ENCODERBLUE3
 
-//****************************************RFID SETUP****************************************
-int rfid_num = 1;
-Adafruit_PN532 nfc[1] = {Adafruit_PN532(PN532_SCK, PN532_MISO, PN532_MOSI, PN532_SS)};
-
-bool rfid_init_complete[2];
-void RfidInit();
-void RfidLoop();
-void CheckingPlayers(uint8_t rfidData[32]);
-
 //****************************************Nextion SETUP****************************************
 HardwareSerial nexHwSerial(2);
 
 void NextionInit();
+void SendCmd(String command);
 
 #endif

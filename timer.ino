@@ -1,14 +1,16 @@
 void TimerInit(){
-    blinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
-    BlinkTimer.deleteTimer(blinkTimerId); 
+    BlinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
+    BlinkTimer.deleteTimer(BlinkTimerId); 
+    TakechipTimerId = TakechipTimer.setInterval(blinkTime,TakechipTimerFunc);
+    TakechipTimer.deleteTimer(TakechipTimerId); 
 }
 
 //****************************************Blink Timer****************************************
 void BlinkTimerStart(int Neo, int NeoColor){
     blinkNeo = Neo;
     blinkColor = NeoColor;
-    if(Neo == ALLNEO)   blinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkAllTimerFunc);
-    else                blinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
+    if(Neo == ALLNEO)   BlinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkAllTimerFunc);
+    else                BlinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
 }
 
 void BlinkTimerFunc(){
@@ -37,4 +39,17 @@ void BlinkAllTimerFunc(){
         }
         blinkOn = true;
     }
+}
+
+//****************************************Takechip Timer****************************************
+void TakechipTimerFunc(){
+    if(takechipCNT>5){
+        takechipCNT = 0;
+        sendCommand("page no_chip");
+        IsMachineUsed = true;
+        IsTakingChip = false;
+        device_ptr = Device_Used;
+        TakechipTimer.deleteTimer(TakechipTimerId); 
+    }
+    takechipCNT++;
 }

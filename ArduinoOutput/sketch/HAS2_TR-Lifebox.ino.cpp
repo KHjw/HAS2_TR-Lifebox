@@ -1,8 +1,8 @@
 #include <Arduino.h>
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
  /*
  *
- * @file TR_Lifebox.ino
+ * @file HAS2_TR-Lifebox.ino
  * @author 홍진우 (kevinlike@naver.com)
  * @brief
  * @version 1.0
@@ -14,169 +14,199 @@
 
 #include "TR_Lifebox.h"
 
-#line 15 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
+#line 15 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
 void setup();
-#line 25 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
+#line 26 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
 void loop();
-#line 2 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
-void Game_Void();
-#line 5 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
-void Game_ptrPrint(String print);
-#line 12 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
-void Game_Manual();
-#line 18 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
-void Game_Setting();
-#line 23 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
-void Game_Ready();
-#line 28 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
-void Game_Selected();
-#line 36 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
-void Game_Login();
-#line 41 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
-void Game_Used();
-#line 47 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
-void Mode_Mannual();
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\mqtt.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\mqtt.ino"
 void callback(char* topic, byte* payload, unsigned int length);
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\neopixel.ino"
+#line 17 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\mqtt.ino"
+void Mqtt_myDN(String input_data);
+#line 24 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\mqtt.ino"
+void Mqtt_updateDS(String myDS);
+#line 38 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\mqtt.ino"
+void Mqtt_updateSCN(String mySCN);
+#line 49 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\mqtt.ino"
+void Device_Manual();
+#line 56 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\mqtt.ino"
+void Device_MiniGame();
+#line 63 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\mqtt.ino"
+void Device_Setting();
+#line 67 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\mqtt.ino"
+void Device_Ready();
+#line 71 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\mqtt.ino"
+void Device_Stelth();
+#line 75 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\mqtt.ino"
+void Device_GhostLogin();
+#line 82 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\mqtt.ino"
+void Device_PlayerLogin();
+#line 87 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\mqtt.ino"
+void Device_Used();
+#line 93 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\mqtt.ino"
+void VoidFunc();
+#line 96 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\mqtt.ino"
+void Device_ptrPrint(String print);
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\neopixel.ino"
 void NeopixelInit();
-#line 7 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\neopixel.ino"
+#line 7 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\neopixel.ino"
 void AllNeoColor(int color_code);
-#line 13 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\neopixel.ino"
+#line 13 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\neopixel.ino"
 void NeoBlink(int neo_code, int color_code, int blink_num, int blink_time);
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\nextion.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\nextion.ino"
 void NextionInit();
-#line 6 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\nextion.ino"
+#line 6 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\nextion.ino"
 void SendCmd(String command);
-#line 17 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\nextion.ino"
-void ExpSend();
-#line 22 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\nextion.ino"
-void BatteryPackSend();
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\rfid.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\rfid.ino"
 void RfidInit();
-#line 26 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\rfid.ino"
-void RfidLoop();
-#line 47 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\rfid.ino"
-void CheckingPlayers(uint8_t rfidData[32]);
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\timer.ino"
+#line 19 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\rfid.ino"
+void RfidLoop(String mode);
+#line 42 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\rfid.ino"
+void Manual_PlayerCheck();
+#line 78 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\rfid.ino"
+void PlayerCheck(String mode);
+#line 105 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\rfid.ino"
+void Rfid_Manual();
+#line 119 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\rfid.ino"
+void Rfid_Ghost();
+#line 124 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\rfid.ino"
+void Rfid_Player();
+#line 132 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\rfid.ino"
+void Rfid_Used();
+#line 137 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\rfid.ino"
+void Rfid_MiniGame();
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\timer.ino"
 void TimerInit();
-#line 7 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\timer.ino"
+#line 9 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\timer.ino"
 void BlinkTimerStart(int Neo, int NeoColor);
-#line 14 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\timer.ino"
+#line 16 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\timer.ino"
 void BlinkTimerFunc();
-#line 26 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\timer.ino"
+#line 28 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\timer.ino"
 void BlinkAllTimerFunc();
-#line 15 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
-void setup() {
+#line 45 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\timer.ino"
+void TakechipTimerFunc();
+#line 15 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
+void setup(){
   Serial.begin(115200);
+  Serial.println("=============================ESP SETUP=============================");
   has2_mqtt.Setup(callback);         // tp-link 접속; ALL, myMAC 구독
-  // has2_mqtt.AddSubscirbe("EI2");
   TimerInit();
   RfidInit();
   NeopixelInit();
   NextionInit();
+  Serial.println("===================================================================");
 }
 
 void loop() {
-  game_ptr();
+  device_ptr();
   BlinkTimer.run();
+  TakechipTimer.run();
 }
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\Game.ino"
-//****************************************game_ptr Function****************************************
-void Game_Void(){               //포인터 초기세팅용 void함수
-}
-
-void Game_ptrPrint(String print){           // 게임 포인터 상태 SerialPrint
-  if(print != game_ptr_state){
-    Serial.println("Game pointer at ::" + print);
-    game_ptr_state = print;
-  }
-}
-
-void Game_Manual(){
-  Game_ptrPrint("Game_Manual");
-  AllNeoColor(YELLOW);
-  rfid_ptr = Mode_Mannual;
-}
-
-void Game_Setting(){
-  Game_ptrPrint("Game_Setting");
-  AllNeoColor(WHITE);
-}
-
-void Game_Ready(){
-  Game_ptrPrint("Game_Ready");
-  AllNeoColor(RED);
-}
-
-void Game_Selected(){
-  Game_ptrPrint("Game_Selected");
-  Serial.println("game_ptr :: Game_Selected");
-  BlinkTimer.deleteTimer(blinkTimerId);
-  BlinkTimerStart(ALLNEO, WHITE);            // 전체 흰색 점멸 시작
-  RfidLoop();
-}
-
-void Game_Login(){
-  Game_ptrPrint("Game_Login");
-  AllNeoColor(RED);
-}
-
-void Game_Used(){
-  Game_ptrPrint("Game_Used");
-  AllNeoColor(BLUE);
-}`-
-
-//****************************************rfid_ptr Function****************************************
-void Mode_Mannual(){
-  Serial.println("Player Tagged");
-  if(!machine_used){
-    sendCommand("page life_chip_send");
-    delay(5000);
-    sendCommand("page no_chip");
-    AllNeoColor(BLUE);
-    machine_used = true;
-  }
-  else{
-    sendCommand("disable.en=1");
-  }
-  delay(1000);
-}
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\mqtt.ino"
-void callback(char* topic, byte* payload, unsigned int length) 
-{
-  static bool start = false;
-  if(!start){
-    start = true;
-    has2_mqtt.Publish(my_topic, "start");
-    return ;
-  }
-  
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\mqtt.ino"
+void callback(char* topic, byte* payload, unsigned int length){
   String input_data = "";
 
-  for (int i = 0; i < length; i++)
+  for(int i=0; i<length; i++)
     input_data += (char)payload[i];
+  has2_mqtt.SaveByTopic(topic, input_data);
 
   Serial.print("Message arrived [");
   Serial.print(topic);
   Serial.print("] : ");
   Serial.println(input_data);
 
-  if(input_data == "OTA")               has2_mqtt.FirmwareUpdate("itembox");
-  else if(input_data == "Manual")       game_ptr = Game_Manual;
-  else if(input_data == "Setting")      game_ptr = Game_Setting;
-  else if(input_data == "Ready")        game_ptr = Game_Ready;
-  else if(input_data == "Activate")     game_ptr = Game_OUTPN532_login;
-  else if(input_data == "Selected")     game_ptr = Game_Selected;
-  else if(input_data == "Login")        game_ptr = Game_Login;
-  else if(input_data == "Used")         game_ptr = Game_Used;
+  Mqtt_myDN(input_data);  // myDN 등록
+  Mqtt_updateDS(has2_mqtt.GetData(myDN, "DS"));
+}
 
-  if(topic == ALL){
-  }
-  else if(topic == my_topic){
+void Mqtt_myDN(String input_data){
+  if((char)myDN[1] != 'R'){
+    for(int i=0; i<3; i++)
+      myDN += (char)input_data[i];
   }
 }
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\neopixel.ino"
+
+void Mqtt_updateDS(String myDS){
+  if(myDS == "scenario")
+    Mqtt_updateSCN(has2_mqtt.GetData(myDN, "SCN"));
+  if(myDS != device_ptr_state){
+    if(myDS == "OTA")               has2_mqtt.FirmwareUpdate("lifebox");
+    else if(myDS == "setting")      device_ptr = Device_Setting;
+    else if(myDS == "ready")        device_ptr = Device_Ready;
+    else if(myDS == "used")         device_ptr = Device_Used;
+    else if(myDS == "manual")       device_ptr = Device_Manual;
+    else if(myDS == "minigame")     device_ptr = Device_MiniGame;
+  }
+  Device_ptrPrint(myDS);
+}
+
+void Mqtt_updateSCN(String mySCN){
+  if(mySCN != current_scenario){
+    if(mySCN == "t42")       device_ptr = Device_GhostLogin;
+    else if(mySCN == "t")    device_ptr = Device_PlayerLogin;
+    else if(mySCN == "tt")   device_ptr = Device_Used;
+    else                    device_ptr = VoidFunc;
+    current_scenario = mySCN;
+  }
+}
+
+//****************************************device_ptr Function****************************************
+void Device_Manual(){
+  Serial.println("DeviceMode Set :: Manual");
+  IsMachineUsed = false;
+  AllNeoColor(YELLOW);
+  RfidLoop("manual");
+}
+
+void Device_MiniGame(){
+  Serial.println("DeviceMode Set :: MiniGame");
+  IsMachineUsed = false;
+  AllNeoColor(YELLOW);
+  RfidLoop("player");
+}
+
+void Device_Setting(){
+  AllNeoColor(WHITE);
+}
+
+void Device_Ready(){
+  AllNeoColor(RED);
+}
+
+void Device_Stelth(){
+  AllNeoColor(BLACK);
+}
+
+void Device_GhostLogin(){
+  BlinkTimer.deleteTimer(BlinkTimerId);
+  AllNeoColor(YELLOW);
+  BlinkTimerStart(MID, WHITE);            // 태그부 흰색 점멸 시작
+  RfidLoop("ghost");
+}
+
+void Device_PlayerLogin(){
+  AllNeoColor(YELLOW);
+  RfidLoop("player");
+}
+
+void Device_Used(){
+  AllNeoColor(BLUE);
+  RfidLoop("used");
+}
+
+// 포인터 초기화용 빈 함수
+void VoidFunc(){}
+
+// 게임 포인터 상태 SerialPrint
+void Device_ptrPrint(String print){
+  if(print != device_ptr_state){
+    if((char)print[1] == 'c' && (char)print[2] == 'n')
+      Serial.println("Training Scenario :: " + print);
+    else
+      Serial.println("Device State :: " + print);
+    device_ptr_state = print;
+  }
+}
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\neopixel.ino"
 void NeopixelInit(){
   for(int i=0; i<NeoNum; i++){
     pixels[i].begin();
@@ -197,7 +227,7 @@ void NeoBlink(int neo_code, int color_code, int blink_num, int blink_time){
     delay(blink_time);
   }
 }
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\nextion.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\nextion.ino"
 void NextionInit(){
   nexInit();
   nexHwSerial.begin(9600, SERIAL_8N1, SERIAL2_RX_PIN, SERIAL2_TX_PIN);
@@ -213,46 +243,26 @@ void SendCmd(String command){           // 영문용 디스플레이 send
   }
   sendCommand(cmd.c_str());
 }
-
-void ExpSend(){
-  SendCmd("picExp.pic=2");
-  SendCmd("pgItemOpen.vExp.val=50");    // 경험치 +50 차있는걸로 기본세팅
-}
-
-void BatteryPackSend(){
-  SendCmd("picBatteryPack.pic=5");
-  SendCmd("pgItemOpen.vBatteryPack.val=3");    // 배터리팩 3개 차있는걸로 기본세팅
-}
-
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\rfid.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\rfid.ino"
 void RfidInit(){
   RestartPn532:
-  for (int i = 0; i < rfid_num; ++i)
-  {
-    nfc[i].begin();
-    if (!(nfc[i].getFirmwareVersion()))
-    {
-      Serial.print("PN532 연결실패 : ");
-      Serial.println(i);
-      AllNeoColor(WHITE);
-      Serial.println("pn532 INIT 재실행");
-      goto RestartPn532;
-    }
-    else
-    {
-      nfc[i].SAMConfig();
-      Serial.print("PN532 연결성공 : ");
-      Serial.println(i);
-      rfid_init_complete[i] = true;
-      AllNeoColor(RED);
-    }
-    delay(100);
+  nfc.begin();
+  if (!(nfc.getFirmwareVersion())){
+    Serial.println("PN532 연결실패");
+    AllNeoColor(WHITE);
+    Serial.println("pn532 INIT 재실행");
+    delay(50);
+    goto RestartPn532;
   }
+  else{
+    nfc.SAMConfig();
+    Serial.println("PN532 연결성공");
+    AllNeoColor(RED);
+  }
+  delay(100);
 }
 
-void RfidLoop(){
-  int pn532_code = 1;     // RFID 한개만 사용
-
+void RfidLoop(String mode){
   uint8_t uid[3][7] = {{0, 0, 0, 0, 0, 0, 0},
                        {0, 0, 0, 0, 0, 0, 0},
                        {0, 0, 0, 0, 0, 0, 0}}; // Buffer to store the returned UID
@@ -261,20 +271,21 @@ void RfidLoop(){
   byte pn532_packetbuffer11[64];
   pn532_packetbuffer11[0] = 0x00;
 
-  if (nfc[pn532_code].sendCommandCheckAck(pn532_packetbuffer11, 1)){ // rfid 통신 가능한 상태인지 확인
-    if (nfc[pn532_code].startPassiveTargetIDDetection(PN532_MIFARE_ISO14443A)){                                       // rfid에 tag 찍혔는지 확인용 //데이터 들어오면 uid정보 가져오기
-      if (nfc[pn532_code].ntag2xx_ReadPage(7, data)){ // ntag 데이터에 접근해서 불러와서 data행열에 저장
+  if (nfc.sendCommandCheckAck(pn532_packetbuffer11, 1)){              // rfid 통신 가능한 상태인지 확인
+    if (nfc.startPassiveTargetIDDetection(PN532_MIFARE_ISO14443A)){   // rfid에 tag 찍혔는지 확인용 //데이터 들어오면 uid정보 가져오기
+      if (nfc.ntag2xx_ReadPage(7, data)){                             // ntag 데이터에 접근해서 불러와서 data행열에 저장
         Serial.println("TAGGGED");
-        CheckingPlayers(data);
+        for(int i = 0; i < 4; i++)                                    //GxPx 데이터만 배열에서 추출해서 string으로 저장
+          tagUser += (char)data[i];
+        if(mode == "manual")        Manual_PlayerCheck();
+        else PlayerCheck(mode);
       }
     }
   }
 }
 
-void CheckingPlayers(uint8_t rfidData[32]){ //어떤 카드가 들어왔는지 확인용
-  String tagUser = "";
-  for(int i = 0; i < 4; i++)    //GxPx 데이터만 배열에서 추출해서 string으로 저장
-    tagUser += (char)rfidData[i];
+//****************************************PlayerCheck Function****************************************
+void Manual_PlayerCheck(){ //어떤 카드가 들어왔는지 확인용
   Serial.println("tag_user_data : " + tagUser);     // 1. 태그한 플레이어의 역할과 생명칩갯수, 최대생명칩갯수 등 읽어오기
   switch(tagUser[3]){
     case '1':
@@ -290,7 +301,7 @@ void CheckingPlayers(uint8_t rfidData[32]){ //어떤 카드가 들어왔는지 �
     case '7':
     case '8':
       Serial.println("Player Tagged");
-      rfid_ptr();
+      Rfid_Manual();
       break;
     case 'M':
       ESP.restart();
@@ -309,18 +320,83 @@ void CheckingPlayers(uint8_t rfidData[32]){ //어떤 카드가 들어왔는지 �
     break;
   }
 }
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Lifebox\\timer.ino"
+
+void PlayerCheck(String mode){
+  Serial.println("tag_user_data : " + tagUser);     // 1. 태그한 플레이어의 역할과 생명칩갯수, 최대생명칩갯수 등 읽어오기
+  if(tagUser == "MMMM")   ESP.restart();            // 스태프카드 인식 시 초기화
+
+  String tagUserRole = has2_mqtt.GetData(tagUser, "R");    // 2. Role 정보
+
+  if(tagUserRole == "player"){                      // 3. Role 판단
+    Serial.println("Player Tagged");
+    if(mode == "player"){
+      if(!(IsTakingChip))
+        Rfid_Player();
+    }
+    if(mode == "used")    Rfid_Used();
+  }
+  else if(tagUserRole == "tagger"){
+    Serial.println("Tagger Tagged");
+  }
+  else if(tagUserRole == "ghost"){
+    Serial.println("Ghost Tagged");
+    if(mode == "ghost")   Rfid_Ghost();
+  }
+  else{
+    Serial.println("Wrong TAG");
+  }
+}
+
+//****************************************rfid_ptr Function****************************************
+void Rfid_Manual(){
+  if(!IsMachineUsed){
+    sendCommand("page life_chip_send");
+    delay(5000);
+    sendCommand("page no_chip");
+    AllNeoColor(BLUE);
+    IsMachineUsed = true;
+  }
+  else{
+    sendCommand("disable.en=1");
+  }
+  delay(1000);
+}
+
+void Rfid_Ghost(){
+  has2_mqtt.Situation("tag", tagUser);
+  device_ptr = Device_PlayerLogin;
+}
+
+void Rfid_Player(){
+  has2_mqtt.Situation("tag", tagUser);
+  sendCommand("page life_chip_send");
+  IsTakingChip = true;
+  TakechipTimer.deleteTimer(TakechipTimerId);
+  TakechipTimerId = TakechipTimer.setInterval(blinkTime,TakechipTimerFunc);
+}
+
+void Rfid_Used(){
+  sendCommand("disable.en=1");
+  delay(1000);
+}
+
+void Rfid_MiniGame(){
+
+}
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Lifebox\\timer.ino"
 void TimerInit(){
-    blinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
-    BlinkTimer.deleteTimer(blinkTimerId); 
+    BlinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
+    BlinkTimer.deleteTimer(BlinkTimerId); 
+    TakechipTimerId = TakechipTimer.setInterval(blinkTime,TakechipTimerFunc);
+    TakechipTimer.deleteTimer(TakechipTimerId); 
 }
 
 //****************************************Blink Timer****************************************
 void BlinkTimerStart(int Neo, int NeoColor){
     blinkNeo = Neo;
     blinkColor = NeoColor;
-    if(Neo == ALLNEO)   blinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkAllTimerFunc);
-    else                blinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
+    if(Neo == ALLNEO)   BlinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkAllTimerFunc);
+    else                BlinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
 }
 
 void BlinkTimerFunc(){
@@ -351,3 +427,15 @@ void BlinkAllTimerFunc(){
     }
 }
 
+//****************************************Takechip Timer****************************************
+void TakechipTimerFunc(){
+    if(takechipCNT>5){
+        takechipCNT = 0;
+        sendCommand("page no_chip");
+        IsMachineUsed = true;
+        IsTakingChip = false;
+        device_ptr = Device_Used;
+        TakechipTimer.deleteTimer(TakechipTimerId); 
+    }
+    takechipCNT++;
+}

@@ -1,4 +1,5 @@
 void TimerInit(){
+    Serial.println("TimerInit");
     blinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
     BlinkTimer.deleteTimer(blinkTimerId); 
 }

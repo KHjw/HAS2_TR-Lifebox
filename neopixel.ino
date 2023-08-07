@@ -1,7 +1,9 @@
 void NeopixelInit(){
+  Serial.println("NeopixelInit");
   for(int i=0; i<NeoNum; i++){
     pixels[i].begin();
   }
+  AllNeoColor(YELLOW);
 }
 
 void AllNeoColor(int color_code){

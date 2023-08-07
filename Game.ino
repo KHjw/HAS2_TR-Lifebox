@@ -1,18 +1,16 @@
 //****************************************game_ptr Function****************************************
-void Game_Void(){               //포인터 초기세팅용 void함수
-}
+void Game_Void(){}      //포인터 초기세팅용 void함수
 
-void Game_ptrPrint(String print){           // 게임 포인터 상태 SerialPrint
+void Game_ptrPrint(String print){     // 게임 포인터 상태 SerialPrint
   if(print != game_ptr_state){
-    Serial.println("Game pointer at ::" + print);
+    Serial.println("Game pointer at :: " + print);
     game_ptr_state = print;
   }
 }
 
 void Game_Manual(){
   Game_ptrPrint("Game_Manual");
-  AllNeoColor(YELLOW);
-  rfid_ptr = Mode_Mannual;
+  RfidLoop();
 }
 
 void Game_Setting(){

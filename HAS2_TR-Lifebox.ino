@@ -12,7 +12,7 @@
 
 #include "TR_Lifebox.h"
 
-void setup() {
+void setup(){
   Serial.begin(115200);
   has2_mqtt.Setup(callback);         // tp-link 접속; ALL, myMAC 구독
   // has2_mqtt.AddSubscirbe("EI2");
@@ -22,7 +22,7 @@ void setup() {
   NextionInit();
 }
 
-void loop() {
+void loop(){
   game_ptr();
   BlinkTimer.run();
 }

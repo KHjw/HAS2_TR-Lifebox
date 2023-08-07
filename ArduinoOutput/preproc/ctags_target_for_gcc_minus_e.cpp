@@ -23,7 +23,7 @@
 # 13 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino"
 # 14 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\HAS2_TR-Lifebox.ino" 2
 
-void setup() {
+void setup(){
   Serial.begin(115200);
   has2_mqtt.Setup(callback); // tp-link 접속; ALL, myMAC 구독
   // has2_mqtt.AddSubscirbe("EI2");
@@ -33,26 +33,24 @@ void setup() {
   NextionInit();
 }
 
-void loop() {
+void loop(){
   game_ptr();
   BlinkTimer.run();
 }
 # 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\Game.ino"
 //****************************************game_ptr Function****************************************
-void Game_Void(){ //포인터 초기세팅용 void함수
-}
+void Game_Void(){} //포인터 초기세팅용 void함수
 
 void Game_ptrPrint(String print){ // 게임 포인터 상태 SerialPrint
   if(print != game_ptr_state){
-    Serial.println("Game pointer at ::" + print);
+    Serial.println("Game pointer at :: " + print);
     game_ptr_state = print;
   }
 }
 
 void Game_Manual(){
   Game_ptrPrint("Game_Manual");
-  AllNeoColor(YELLOW);
-  rfid_ptr = Mode_Mannual;
+  RfidLoop();
 }
 
 void Game_Setting(){
@@ -99,8 +97,7 @@ void Mode_Mannual(){
   delay(1000);
 }
 # 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\mqtt.ino"
-void callback(char* topic, byte* payload, unsigned int length)
-{
+void callback(char* topic, byte* payload, unsigned int length){
   String input_data = "";
   for (int i = 0; i < length; i++)
     input_data += (char)payload[i];
@@ -110,7 +107,7 @@ void callback(char* topic, byte* payload, unsigned int length)
   Serial.print("] : ");
   Serial.println(input_data);
 
-  if(input_data == "OTA") has2_mqtt.FirmwareUpdate("itembox");
+  if(input_data == "OTA") has2_mqtt.FirmwareUpdate("ex_lifebox");
   else if(input_data == "Manual") game_ptr = Game_Manual;
   else if(input_data == "Setting") game_ptr = Game_Setting;
   else if(input_data == "Ready") game_ptr = Game_Ready;
@@ -120,9 +117,11 @@ void callback(char* topic, byte* payload, unsigned int length)
 }
 # 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\neopixel.ino"
 void NeopixelInit(){
+  Serial.println("NeopixelInit");
   for(int i=0; i<NeoNum; i++){
     pixels[i].begin();
   }
+  AllNeoColor(YELLOW);
 }
 
 void AllNeoColor(int color_code){
@@ -141,8 +140,11 @@ void NeoBlink(int neo_code, int color_code, int blink_num, int blink_time){
 }
 # 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\nextion.ino"
 void NextionInit(){
+  Serial.println("NextionInit");
   nexInit();
   nexHwSerial.begin(9600, 0x800001c, 39, 33);
+  sendCommand("chip.vLang.txt=\"Kor\""); // Nextion 언어변수를 Kor로
+  sendCommand("page chip");
 }
 
 void SendCmd(String command){ // 영문용 디스플레이 send
@@ -157,33 +159,25 @@ void SendCmd(String command){ // 영문용 디스플레이 send
 }
 # 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\rfid.ino"
 void RfidInit(){
+  Serial.println("RfidInit");
   RestartPn532:
-  for (int i = 0; i < rfid_num; ++i)
-  {
-    nfc[i].begin();
-    if (!(nfc[i].getFirmwareVersion()))
-    {
-      Serial.print("PN532 연결실패 : ");
-      Serial.println(i);
-      AllNeoColor(WHITE);
-      Serial.println("pn532 INIT 재실행");
-      goto RestartPn532;
-    }
-    else
-    {
-      nfc[i].SAMConfig();
-      Serial.print("PN532 연결성공 : ");
-      Serial.println(i);
-      rfid_init_complete[i] = true;
-      AllNeoColor(RED);
-    }
-    delay(100);
+  nfc.begin();
+  if (!(nfc.getFirmwareVersion())){
+    Serial.println("PN532 연결실패");
+    AllNeoColor(WHITE);
+    Serial.println("pn532 INIT 재실행");
+    goto RestartPn532;
   }
+  else{
+    nfc.SAMConfig();
+    Serial.println("PN532 연결성공");
+    rfid_init_complete = true;
+    AllNeoColor(RED);
+  }
+  delay(100);
 }
 
 void RfidLoop(){
-  int pn532_code = 1; // RFID 한개만 사용
-
   uint8_t uid[3][7] = {{0, 0, 0, 0, 0, 0, 0},
                        {0, 0, 0, 0, 0, 0, 0},
                        {0, 0, 0, 0, 0, 0, 0}}; // Buffer to store the returned UID
@@ -192,9 +186,9 @@ void RfidLoop(){
   byte pn532_packetbuffer11[64];
   pn532_packetbuffer11[0] = 0x00;
 
-  if (nfc[pn532_code].sendCommandCheckAck(pn532_packetbuffer11, 1)){ // rfid 통신 가능한 상태인지 확인
-    if (nfc[pn532_code].startPassiveTargetIDDetection((0x00))){ // rfid에 tag 찍혔는지 확인용 //데이터 들어오면 uid정보 가져오기
-      if (nfc[pn532_code].ntag2xx_ReadPage(7, data)){ // ntag 데이터에 접근해서 불러와서 data행열에 저장
+  if (nfc.sendCommandCheckAck(pn532_packetbuffer11, 1)){ // rfid 통신 가능한 상태인지 확인
+    if (nfc.startPassiveTargetIDDetection((0x00))){ // rfid에 tag 찍혔는지 확인용 //데이터 들어오면 uid정보 가져오기
+      if (nfc.ntag2xx_ReadPage(7, data)){ // ntag 데이터에 접근해서 불러와서 data행열에 저장
         Serial.println("TAGGGED");
         CheckingPlayers(data);
       }
@@ -224,16 +218,19 @@ void CheckingPlayers(uint8_t rfidData[32]){ //어떤 카드가 들어왔는지 �
       rfid_ptr();
       break;
     case 'M':
+      delay(10);
       ESP.restart();
       break;
     case 'E':
       AllNeoColor(PURPLE);
+      Language = "Eng";
+      machine_used = false;
       sendCommand("chip.vLang.txt=\"Eng\""); // Nextion 언어변수를 Eng로
       delay(10);
       sendCommand("page chip"); // 초기페이지 세팅
+      AllNeoColor(YELLOW);
       Serial.println("Language set to English");
       delay(10);
-      ESP.restart();
       break;
     default:
     Serial.println("Wrong TAG");
@@ -242,6 +239,7 @@ void CheckingPlayers(uint8_t rfidData[32]){ //어떤 카드가 들어왔는지 �
 }
 # 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\생장 롤백\\HAS2_TR-Lifebox\\timer.ino"
 void TimerInit(){
+    Serial.println("TimerInit");
     blinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
     BlinkTimer.deleteTimer(blinkTimerId);
 }

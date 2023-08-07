@@ -21,7 +21,7 @@ void Game_ptrPrint(String print);
 void Mode_Mannual();
 
 void (*game_ptr)() = Game_Manual;
-void (*rfid_ptr)() = Game_Void;
+void (*rfid_ptr)() = Mode_Mannual;
 
 String Language = "Kor";
 String game_ptr_state = "";
@@ -68,10 +68,9 @@ int color[11][3] = {  {20, 20, 20},   //WHITE
                       {0, 0, 80}};    //ENCODERBLUE3
 
 //****************************************RFID SETUP****************************************
-int rfid_num = 1;
-Adafruit_PN532 nfc[1] = {Adafruit_PN532(PN532_SCK, PN532_MISO, PN532_MOSI, PN532_SS)};
+Adafruit_PN532 nfc(PN532_SCK, PN532_MISO, PN532_MOSI, PN532_SS);
 
-bool rfid_init_complete[2];
+bool rfid_init_complete;
 void RfidInit();
 void RfidLoop();
 void CheckingPlayers(uint8_t rfidData[32]);

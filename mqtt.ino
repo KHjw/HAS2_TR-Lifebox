@@ -1,5 +1,4 @@
-void callback(char* topic, byte* payload, unsigned int length) 
-{
+void callback(char* topic, byte* payload, unsigned int length){
   String input_data = "";
   for (int i = 0; i < length; i++)
     input_data += (char)payload[i];
@@ -9,7 +8,7 @@ void callback(char* topic, byte* payload, unsigned int length)
   Serial.print("] : ");
   Serial.println(input_data);
 
-  if(input_data == "OTA")               has2_mqtt.FirmwareUpdate("lifebox");
+  if(input_data == "OTA")               has2_mqtt.FirmwareUpdate("ex_lifebox");
   else if(input_data == "Manual")       game_ptr = Game_Manual;
   else if(input_data == "Setting")      game_ptr = Game_Setting;
   else if(input_data == "Ready")        game_ptr = Game_Ready;

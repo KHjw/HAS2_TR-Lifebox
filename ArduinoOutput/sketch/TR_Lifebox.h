@@ -11,9 +11,8 @@ String device_ptr_state = "";
 String current_scenario = "";
 bool IsMachineUsed = false;
 bool IsTakingChip = false;
-
-void VoidFunc();    // 포인터 초기화용 빈 함수
-void (*device_ptr)() = VoidFunc;
+bool IsScenarioMode = false;
+bool IsDsSkip = false;
 
 //****************************************MQTT SETUP****************************************
 HAS2_MQTT has2_mqtt;
@@ -21,15 +20,22 @@ void callback(char* topic, byte* payload, unsigned int length);
 void Mqtt_myDN(String input_data);
 void Mqtt_updateDS(String myDS);
 void Mqtt_updateSCN(String mySCN);
+void SituationSend();
 
 // device_ptr
 void Device_Manual();
+void Device_MiniGame();
 void Device_Setting();
 void Device_Ready();
+void Device_Selected();
+void Device_Stelth();
 void Device_GhostLogin();
 void Device_PlayerLogin();
 void Device_Used();
 void Device_ptrPrint(String print);
+
+void VoidFunc();    // 포인터 초기화용 빈 함수
+void (*device_ptr)() = Device_MiniGame;
 
 //****************************************RFID SETUP****************************************
 Adafruit_PN532 nfc(PN532_SCK, PN532_MISO, PN532_MOSI, PN532_SS);
@@ -39,7 +45,7 @@ void RfidLoop(String mode);
 
 String tagUser = "";
 
-// rfid_ptr
+// rfid_func
 void Rfid_Manual();
 void Rfid_Ghost();
 void Rfid_Player();

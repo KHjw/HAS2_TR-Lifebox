@@ -18,3 +18,10 @@ void NeoBlink(int neo_code, int color_code, int blink_num, int blink_time){
     delay(blink_time);
   }
 }
+
+void Scenario_WaitBlink(int neoID){     // 시나리오 모드용 점멸
+  if(IsScenarioMode){
+    BlinkTimer.deleteTimer(BlinkTimerId);
+    BlinkTimerStart(neoID, WHITE);
+  }
+}

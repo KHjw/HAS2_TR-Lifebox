@@ -11,8 +11,8 @@
 #include <HAS2_MQTT.h>
 #include <SimpleTimer.h>
 
-#define SERIAL2_RX_PIN 39
-#define SERIAL2_TX_PIN 33
+#define SERIAL2_RX_PIN   39
+#define SERIAL2_TX_PIN   33
 
 #define PN532_SCK        18
 #define PN532_MISO       19

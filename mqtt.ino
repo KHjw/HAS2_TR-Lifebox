@@ -10,24 +10,34 @@ void callback(char* topic, byte* payload, unsigned int length){
   Serial.print("] : ");
   Serial.println(input_data);
 
-  Mqtt_myDN(input_data);  // myDN 등록
   Mqtt_updateDS(has2_mqtt.GetData(myDN, "DS"));
 }
 
-void Mqtt_myDN(String input_data){
-  if((char)myDN[1] != 'R'){
-    for(int i=0; i<3; i++)
-      myDN += (char)input_data[i];
-  }
-}
-
 void Mqtt_updateDS(String myDS){
-  if(myDS == "scenario")
+  BlinkTimer.deleteTimer(BlinkTimerId);
+  takechipCNT = 0;
+  if(myDS == "scenario"){
+    IsScenarioMode = true;
     Mqtt_updateSCN(has2_mqtt.GetData(myDN, "SCN"));
+  }
   if(myDS != device_ptr_state){
-    if(myDS == "OTA")               has2_mqtt.FirmwareUpdate("lifebox");
+    sendCommand("sleep=0");
+    if(myDS == "OTA"){
+      AllNeoColor(GREEN);
+      sendCommand("page black");
+      has2_mqtt.FirmwareUpdate("ex_lifebox");
+    }
     else if(myDS == "setting")      device_ptr = Device_Setting;
     else if(myDS == "ready")        device_ptr = Device_Ready;
+    else if(myDS == "activate"){
+      sendCommand("chip.vLang.txt=\"Kor\"");      // Nextion 언어변수를 Kor로
+      sendCommand("page chip");
+      IsScenarioMode = false;
+      IsMachineUsed = false;
+      AllNeoColor(YELLOW);
+      Serial.println("DeviceMode Set :: Manual");
+      device_ptr = Device_Manual;
+    }
     else if(myDS == "used")         device_ptr = Device_Used;
     else if(myDS == "manual")       device_ptr = Device_Manual;
     else if(myDS == "minigame")     device_ptr = Device_MiniGame;
@@ -36,25 +46,92 @@ void Mqtt_updateDS(String myDS){
 }
 
 void Mqtt_updateSCN(String mySCN){
-  if(mySCN != current_scenario){
-    if(mySCN == "t42")       device_ptr = Device_GhostLogin;
-    else if(mySCN == "t")    device_ptr = Device_PlayerLogin;
-    else if(mySCN == "tt")   device_ptr = Device_Used;
-    else                    device_ptr = VoidFunc;
+  IsDsSkip = true;
+  Serial.println("Scenario RCV :: " + mySCN);
+  if(mySCN != "-1" && mySCN != current_scenario){
+    Serial.println("Scenario at :: " + mySCN);
+
+    String temp_mySCN = mySCN;
+    if(temp_mySCN.startsWith("p")){
+      temp_mySCN.remove(0,1);
+      if(temp_mySCN.toInt()==1 || (temp_mySCN.toInt()>3 && temp_mySCN.toInt()<65) || temp_mySCN.toInt()>=77){
+        sendCommand("page black");
+        sendCommand("sleep=1");
+        Serial.println("sleep!!");
+        device_ptr = Device_Stelth;
+      }
+    }
+    else if(mySCN.startsWith("t")){
+      temp_mySCN.remove(0,1);
+      if(temp_mySCN.toInt()==1 || (temp_mySCN.toInt()>2 && temp_mySCN.toInt()<39) || temp_mySCN.toInt()>=45){   
+        sendCommand("page black");
+        sendCommand("sleep=1");
+        Serial.println("sleep!!");
+        device_ptr = Device_Stelth;
+      }
+    }
+    if(mySCN == "p3"){
+      sendCommand("sleep=1");
+      device_ptr = Device_PlayerRandBlink;
+    }
+    else if(mySCN == "t2"){
+      sendCommand("sleep=1");
+      device_ptr = Device_TaggerRandBlink;
+    }
+    else if(mySCN == "p65"){
+      sendCommand("sleep=0");
+      AllNeoColor(YELLOW);
+      Scenario_WaitBlink(MID);
+      sendCommand("page chip");
+      device_ptr = Device_PlayerLogin;
+    }
+    else if(mySCN == "p69"){
+      sendCommand("sleep=0");
+      AllNeoColor(YELLOW);
+      takechipCNT = 5;
+      TakechipTimerFunc();
+    }
+    else if(mySCN == "t39"){
+      sendCommand("sleep=0");
+      sendCommand("page chip");
+      device_ptr = Device_Selected;
+    }
+    else if(mySCN == "t40"){
+      AllNeoColor(YELLOW);
+      Scenario_WaitBlink(MID);
+      sendCommand("sleep=0");
+      sendCommand("page chip");
+      device_ptr = Device_GhostLogin;
+    }
+    else if(mySCN == "t45"){
+      sendCommand("sleep=0");
+      sendCommand("page chip");
+      device_ptr = Device_Selected;
+    }
+    else
+      Serial.println("Receved Unsigned SCN");
     current_scenario = mySCN;
+  }
+}
+
+void SituationSend(){
+  Serial.println("Situation Send???");
+  if(IsScenarioMode)  Serial.println("IsScenarioMode :: true");
+  if(!IsDsSkip)  Serial.println("IsDsSkip :: false");
+  if(IsScenarioMode && !IsDsSkip){
+    Serial.println("Stituation \"tag\" :: Publish");
+    has2_mqtt.Situation("tag", tagUser);
   }
 }
 
 //****************************************device_ptr Function****************************************
 void Device_Manual(){
-  Serial.println("DeviceMode Set :: Manual");
-  IsMachineUsed = false;
-  AllNeoColor(YELLOW);
   RfidLoop("manual");
 }
 
 void Device_MiniGame(){
-  Serial.println("DeviceMode Set :: MiniGame");
+  // Serial.println("DeviceMode Set :: MiniGame");
+  IsScenarioMode = false;
   IsMachineUsed = false;
   AllNeoColor(YELLOW);
   RfidLoop("player");
@@ -62,25 +139,52 @@ void Device_MiniGame(){
 
 void Device_Setting(){
   AllNeoColor(WHITE);
+  RfidLoop("MMMM");
 }
 
 void Device_Ready(){
   AllNeoColor(RED);
+  RfidLoop("MMMM");
+}
+
+void Device_Selected(){
+  AllNeoColor(YELLOW);
+  RfidLoop("MMMM");
+}
+
+void Device_PlayerRandBlink(){
+  static bool bNeoBlink = false;
+  long lnRandomDelay = random(2,8) *100;
+  if(bNeoBlink)
+    AllNeoColor(GREEN);
+  else
+    AllNeoColor(BLACK);
+  bNeoBlink = !bNeoBlink;
+  delay(lnRandomDelay);
+}
+
+void Device_TaggerRandBlink(){
+  static bool bNeoBlink = false;
+  long lnRandomDelay = random(2,8) *100;
+  if(bNeoBlink)
+    AllNeoColor(PURPLE);
+  else
+    AllNeoColor(BLACK);
+  bNeoBlink = !bNeoBlink;
+  delay(lnRandomDelay);
 }
 
 void Device_Stelth(){
+  // SendCmd("sleep=1");
   AllNeoColor(BLACK);
+  RfidLoop("MMMM");
 }
 
 void Device_GhostLogin(){
-  BlinkTimer.deleteTimer(BlinkTimerId);
-  AllNeoColor(YELLOW);
-  BlinkTimerStart(MID, WHITE);            // 태그부 흰색 점멸 시작
   RfidLoop("ghost");
 }
 
 void Device_PlayerLogin(){
-  AllNeoColor(YELLOW);
   RfidLoop("player");
 }
 

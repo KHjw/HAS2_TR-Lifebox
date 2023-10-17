@@ -43,7 +43,10 @@ void BlinkAllTimerFunc(){
 
 //****************************************Takechip Timer****************************************
 void TakechipTimerFunc(){
-    if(takechipCNT>5){
+    takechipCNT++;
+    Serial.println("takechipCNT" + (String)(takechipCNT));
+    if(takechipCNT >= 5){
+        Serial.println("Device Used!!!");
         takechipCNT = 0;
         sendCommand("page no_chip");
         IsMachineUsed = true;
@@ -51,5 +54,4 @@ void TakechipTimerFunc(){
         device_ptr = Device_Used;
         TakechipTimer.deleteTimer(TakechipTimerId); 
     }
-    takechipCNT++;
 }
